@@ -21,6 +21,13 @@ namespace BouncingBall
         public Form1()
         {
             InitializeComponent();
+            InitializeApp();
+        }
+
+        private void InitializeApp()
+        {
+            verVelocity = ballStep;
+            horVelocity = ballStep;
             InitializeMainTimer();
         }
 
@@ -35,6 +42,7 @@ namespace BouncingBall
         private void MainTimer_Tick(object sender, EventArgs e)
         {
             MoveBall();
+            BallBorderCollide();
         }
 
         private void MoveBall()
@@ -42,5 +50,27 @@ namespace BouncingBall
             Ball.Top += verVelocity;
             Ball.Left += horVelocity;
         }
+
+        private void BallBorderCollide()
+        {
+            if(Ball.Top + Ball.Height > ClientRectangle.Height) //collide with bottom border
+            {
+                verVelocity *= -1;
+                //verVelocity = -verVelocity;                
+            }
+            else if (Ball.Top < 0) //collide with top border
+            {
+                verVelocity = -verVelocity;
+            }
+            else if(Ball.Left < 0) //collide with left border
+            {
+                horVelocity = -horVelocity;
+            }
+            else if(Ball.Left + Ball.Width > ClientRectangle.Width) //collide with right border
+            {
+                horVelocity = -horVelocity;
+            }
+        }
+
     }
 }
