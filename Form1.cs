@@ -29,6 +29,10 @@ namespace BouncingBall
             verVelocity = ballStep;
             horVelocity = ballStep;
 
+            Ball.BackColor = Color.Transparent;
+            Ball.SizeMode = PictureBoxSizeMode.StretchImage;
+            Ball.Image = Properties.Resources.foot_ball;
+
             this.KeyDown += new KeyEventHandler(App_KeyDown);
 
             UpdateBallStepLabel();
@@ -84,13 +88,17 @@ namespace BouncingBall
             if(e.KeyCode == Keys.X)
             {
                 ballStep += 1;
+                verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
+                horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
                 UpdateBallStepLabel();
             }
             else if(e.KeyCode == Keys.Z)
             {
-                if(ballStep > 0)
+                if(ballStep > 1)
                 {
                     ballStep -= 1;
+                    verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
+                    horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
                     UpdateBallStepLabel();
                 }
             }
@@ -100,8 +108,5 @@ namespace BouncingBall
         {
             BallStepLabel.Text = "Ball Step: " + ballStep;
         }
-
-
-
     }
 }
