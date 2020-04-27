@@ -28,6 +28,9 @@ namespace BouncingBall
         {
             verVelocity = ballStep;
             horVelocity = ballStep;
+
+            this.KeyDown += new KeyEventHandler(App_KeyDown);
+
             InitializeMainTimer();
         }
 
@@ -60,17 +63,34 @@ namespace BouncingBall
             }
             else if (Ball.Top < 0) //collide with top border
             {
-                verVelocity = -verVelocity;
+                verVelocity *= -1;
+                //verVelocity = -verVelocity;
             }
             else if(Ball.Left < 0) //collide with left border
             {
-                horVelocity = -horVelocity;
+                horVelocity *= -1;
+                //horVelocity = -horVelocity;
             }
             else if(Ball.Left + Ball.Width > ClientRectangle.Width) //collide with right border
             {
-                horVelocity = -horVelocity;
+                horVelocity *= -1;
+                //horVelocity = -horVelocity;
             }
         }
+
+        private void App_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.X)
+            {
+                ballStep += 1;
+            }
+            else if(e.KeyCode == Keys.Z)
+            {
+                ballStep -= 1;
+            }
+        }
+
+
 
     }
 }
