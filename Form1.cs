@@ -31,6 +31,7 @@ namespace BouncingBall
 
             this.KeyDown += new KeyEventHandler(App_KeyDown);
 
+            UpdateBallStepLabel();
             InitializeMainTimer();
         }
 
@@ -83,11 +84,21 @@ namespace BouncingBall
             if(e.KeyCode == Keys.X)
             {
                 ballStep += 1;
+                UpdateBallStepLabel();
             }
             else if(e.KeyCode == Keys.Z)
             {
-                ballStep -= 1;
+                if(ballStep > 0)
+                {
+                    ballStep -= 1;
+                    UpdateBallStepLabel();
+                }
             }
+        }
+
+        private void UpdateBallStepLabel()
+        {
+            BallStepLabel.Text = "Ball Step: " + ballStep;
         }
 
 
