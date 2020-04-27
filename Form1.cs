@@ -12,6 +12,10 @@ namespace BouncingBall
 {
     public partial class Form1 : Form
     {
+
+        bool verNegative = false;
+        bool horNegative = false;
+
         int horVelocity = 0;
         int verVelocity = 0;
         int ballStep = 3;
@@ -82,16 +86,52 @@ namespace BouncingBall
 
         }
 
+        private void CheckVelocityNegative()
+        {
+            if(verVelocity < 0)
+            {
+                verNegative = true;
+            }
+            else
+            {
+                verNegative = false;
+            }
+            if (horVelocity < 0)
+            {
+                horNegative = true;
+            }
+            else
+            {
+                horNegative = false;
+            }
+        }
+
         private void BallBorderCollide()
         {
             if(Ball.Top + Ball.Height == ClientRectangle.Height || Ball.Top == 0) //collide with bottom border
             {
                 verVelocity *= -1;
+                if(!verNegative)
+                {
+                    verNegative = true;
+                }
+                else
+                {
+                    verNegative = false;
+                }
                 //verVelocity = -verVelocity;                
             }
             else if(Ball.Left == 0 || Ball.Left + Ball.Width == ClientRectangle.Width) //collide with left border
             {
                 horVelocity *= -1;
+                if (!horNegative)
+                {
+                    horNegative = true;
+                }
+                else
+                {
+                    horNegative = false;
+                }
                 //horVelocity = -horVelocity;
             }
 
@@ -102,10 +142,27 @@ namespace BouncingBall
             if(e.KeyCode == Keys.X)
             {
                 ballStep += 1;
-                if (verVelocity != 0)
+                if (ballStep != 0)
                 {
-                    verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
-                    horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
+                    if(verNegative)
+                    {
+                        verVelocity = -ballStep;
+                    }
+                    else
+                    {
+                        verVelocity = ballStep;
+                    }
+                    if (horNegative)
+                    {
+                        horVelocity = -ballStep;
+                    }
+                    else
+                    {
+                        horVelocity = ballStep;
+                    }
+                    CheckVelocityNegative();
+                    //verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
+                    //horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
                 }
                 else
                 {
@@ -119,10 +176,27 @@ namespace BouncingBall
                 if(ballStep > 0)
                 {
                     ballStep -= 1;
-                    if(verVelocity != 0)
+                    if (ballStep != 0)
                     {
-                        verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
-                        horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
+                        if (verNegative)
+                        {
+                            verVelocity = -ballStep;
+                        }
+                        else
+                        {
+                            verVelocity = ballStep;
+                        }
+                        if (horNegative)
+                        {
+                            horVelocity = -ballStep;
+                        }
+                        else
+                        {
+                            horVelocity = ballStep;
+                        }
+                        CheckVelocityNegative();
+                        //verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
+                        //horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
                     }
                     else
                     {
