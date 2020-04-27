@@ -55,32 +55,46 @@ namespace BouncingBall
 
         private void MoveBall()
         {
-            Ball.Top += verVelocity;
-            Ball.Left += horVelocity;
+            if(Ball.Top + verVelocity > ClientRectangle.Height - Ball.Height)
+            {
+                Ball.Top = ClientRectangle.Height - Ball.Height;
+            }
+            else if(Ball.Top + verVelocity < 0)
+            {
+                Ball.Top = 0;
+            }
+            else
+            {
+                Ball.Top += verVelocity;
+            }
+            if (Ball.Left + horVelocity > ClientRectangle.Width - Ball.Width)
+            {
+                Ball.Left = ClientRectangle.Width - Ball.Width;
+            }
+            else if (Ball.Left + horVelocity < 0)
+            {
+                Ball.Left = 0;
+            }
+            else
+            {
+                Ball.Left += horVelocity;
+            }
+
         }
 
         private void BallBorderCollide()
         {
-            if(Ball.Top + Ball.Height > ClientRectangle.Height) //collide with bottom border
+            if(Ball.Top + Ball.Height == ClientRectangle.Height || Ball.Top == 0) //collide with bottom border
             {
                 verVelocity *= -1;
                 //verVelocity = -verVelocity;                
             }
-            else if (Ball.Top < 0) //collide with top border
-            {
-                verVelocity *= -1;
-                //verVelocity = -verVelocity;
-            }
-            else if(Ball.Left < 0) //collide with left border
+            else if(Ball.Left == 0 || Ball.Left + Ball.Width == ClientRectangle.Width) //collide with left border
             {
                 horVelocity *= -1;
                 //horVelocity = -horVelocity;
             }
-            else if(Ball.Left + Ball.Width > ClientRectangle.Width) //collide with right border
-            {
-                horVelocity *= -1;
-                //horVelocity = -horVelocity;
-            }
+
         }
 
         private void App_KeyDown(object sender, KeyEventArgs e)
@@ -88,17 +102,34 @@ namespace BouncingBall
             if(e.KeyCode == Keys.X)
             {
                 ballStep += 1;
-                verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
-                horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
+                if (verVelocity != 0)
+                {
+                    verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
+                    horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
+                }
+                else
+                {
+                    verVelocity = ballStep;
+                    horVelocity = ballStep;
+                }
                 UpdateBallStepLabel();
             }
             else if(e.KeyCode == Keys.Z)
             {
-                if(ballStep > 1)
+                if(ballStep > 0)
                 {
                     ballStep -= 1;
-                    verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
-                    horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
+                    if(verVelocity != 0)
+                    {
+                        verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
+                        horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
+                    }
+                    else
+                    {
+                        verVelocity = ballStep;
+                        horVelocity = ballStep;
+                    }
+
                     UpdateBallStepLabel();
                 }
             }
