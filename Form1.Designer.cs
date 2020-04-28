@@ -36,7 +36,7 @@
             // Ball
             // 
             this.Ball.BackColor = System.Drawing.Color.Coral;
-            this.Ball.Location = new System.Drawing.Point(560, 233);
+            this.Ball.Location = new System.Drawing.Point(416, 186);
             this.Ball.Name = "Ball";
             this.Ball.Size = new System.Drawing.Size(100, 100);
             this.Ball.TabIndex = 0;
