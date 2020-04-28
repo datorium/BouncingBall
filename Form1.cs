@@ -30,8 +30,14 @@ namespace BouncingBall
             verVelocity = speed;
             horVelocity = speed;
             this.BackColor = Color.LightBlue;
+            this.DoubleBuffered = true;
             this.KeyDown += new KeyEventHandler(Field_KeyDown);
             UpdateSpeedLabel();
+            Ball.Image = Properties.Resources.foot_ball;
+            Ball.SizeMode = PictureBoxSizeMode.StretchImage;
+            Ball.Height = 40;
+            Ball.Width = 40;
+            Ball.BackColor = Color.Transparent;           
         }
         
         private void InitializeMainTimer()
@@ -79,7 +85,7 @@ namespace BouncingBall
             if(e.KeyCode == Keys.X)
             {
                 speed += 1; //speed++
-
+                UpdateVelocities();
                 UpdateSpeedLabel();
             }
             else if(e.KeyCode == Keys.Z)
@@ -87,7 +93,7 @@ namespace BouncingBall
                 if(speed > 1)
                 {
                     speed -= 1; //speed--
-
+                    UpdateVelocities();
                     UpdateSpeedLabel();
                 }                
             }
@@ -97,5 +103,12 @@ namespace BouncingBall
         {
             SpeedLabel.Text = "Ball speed: " + speed;
         }
+
+        private void UpdateVelocities()
+        {
+            verVelocity = speed * (verVelocity / Math.Abs(verVelocity));
+            horVelocity = speed * (horVelocity / Math.Abs(horVelocity));
+        }
+
     }
 }
