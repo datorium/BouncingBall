@@ -31,7 +31,6 @@
             this.Ball = new System.Windows.Forms.PictureBox();
             this.BallStepLabel = new System.Windows.Forms.Label();
             this.Racket = new System.Windows.Forms.PictureBox();
-            this.MouseCoordinates = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Ball)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Racket)).BeginInit();
             this.SuspendLayout();
@@ -39,7 +38,7 @@
             // Ball
             // 
             this.Ball.BackColor = System.Drawing.Color.OrangeRed;
-            this.Ball.Location = new System.Drawing.Point(282, 153);
+            this.Ball.Location = new System.Drawing.Point(319, 264);
             this.Ball.Name = "Ball";
             this.Ball.Size = new System.Drawing.Size(100, 98);
             this.Ball.TabIndex = 0;
@@ -58,7 +57,7 @@
             // Racket
             // 
             this.Racket.BackColor = System.Drawing.Color.DarkOrchid;
-            this.Racket.Location = new System.Drawing.Point(215, 292);
+            this.Racket.Location = new System.Drawing.Point(267, 409);
             this.Racket.Name = "Racket";
             this.Racket.Size = new System.Drawing.Size(223, 34);
             this.Racket.TabIndex = 2;
@@ -67,22 +66,11 @@
             this.Racket.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Racket_MouseMove);
             this.Racket.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Racket_MouseUp);
             // 
-            // MouseCoordinates
-            // 
-            this.MouseCoordinates.AutoSize = true;
-            this.MouseCoordinates.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MouseCoordinates.Location = new System.Drawing.Point(227, 9);
-            this.MouseCoordinates.Name = "MouseCoordinates";
-            this.MouseCoordinates.Size = new System.Drawing.Size(122, 44);
-            this.MouseCoordinates.TabIndex = 3;
-            this.MouseCoordinates.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.MouseCoordinates);
+            this.ClientSize = new System.Drawing.Size(779, 518);
             this.Controls.Add(this.Racket);
             this.Controls.Add(this.BallStepLabel);
             this.Controls.Add(this.Ball);
@@ -101,7 +89,6 @@
         private System.Windows.Forms.PictureBox Ball;
         private System.Windows.Forms.Label BallStepLabel;
         private System.Windows.Forms.PictureBox Racket;
-        private System.Windows.Forms.Label MouseCoordinates;
     }
 }
 

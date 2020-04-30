@@ -18,8 +18,9 @@ namespace BouncingBall
         bool mouseDown = false;
 
         private Point MouseDownLocation;
+        private PictureBox tile = null;
 
-        Timer mainTimer = null;
+        private Timer mainTimer = null;
 
 
         public Form1()
@@ -44,6 +45,8 @@ namespace BouncingBall
 
             UpdateBallStepLabel();
             InitializeMainTimer();
+
+            GenerateTiles(10);
         }
 
         private void InitializeMainTimer()
@@ -59,6 +62,7 @@ namespace BouncingBall
             MoveBall();
             BallBorderCollide();
             BallRacketCollision();
+            BallTileCollision();
         }
 
         private void MoveBall()
@@ -125,7 +129,6 @@ namespace BouncingBall
             BallStepLabel.Text = "Ball Step: " + ballStep;
         }
 
-
         private void Racket_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
@@ -146,6 +149,39 @@ namespace BouncingBall
             {
                 Racket.Left = e.X + Racket.Left - MouseDownLocation.X;
                 Racket.Top = e.Y + Racket.Top - MouseDownLocation.Y;
+            }
+        }
+
+        private void GenerateTiles(int count)
+        {
+            for(int i = 1; i <= count; i++)
+            {
+                tile = new PictureBox();
+                tile.Width = 40;
+                tile.Height = 40;
+                tile.Top = 50;
+                tile.Left = 60 * i;
+                tile.BackColor = Color.Red;
+                tile.Tag = "tile";
+                this.Controls.Add(tile);
+            }
+        }
+
+        private void BallTileCollision()
+        {
+            foreach(Control contr in this.Controls)
+            {
+                if((string)contr.Tag == "tile")
+                {
+                    if (contr.Bounds.IntersectsWith(Ball.Bounds))
+                    {
+                        contr.Dispose();
+                        ballStep += 1;
+                        verVelocity = ballStep * (verVelocity / Math.Abs(verVelocity));
+                        horVelocity = ballStep * (horVelocity / Math.Abs(horVelocity));
+                        UpdateBallStepLabel();
+                    }
+                }
             }
         }
     }
