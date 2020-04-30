@@ -15,8 +15,12 @@ namespace BouncingBall
         int horVelocity = 0;
         int verVelocity = 0;
         int ballStep = 3;
+        bool mouseDown = false;
+
+        private Point MouseDownLocation;
 
         Timer mainTimer = null;
+
 
         public Form1()
         {
@@ -29,11 +33,14 @@ namespace BouncingBall
             verVelocity = ballStep;
             horVelocity = ballStep;
 
+            Ball.Width = 40;
+            Ball.Height = 40;
             Ball.BackColor = Color.Transparent;
             Ball.SizeMode = PictureBoxSizeMode.StretchImage;
             Ball.Image = Properties.Resources.foot_ball;
 
             this.KeyDown += new KeyEventHandler(App_KeyDown);
+            this.DoubleBuffered = true;
 
             UpdateBallStepLabel();
             InitializeMainTimer();
@@ -51,12 +58,21 @@ namespace BouncingBall
         {
             MoveBall();
             BallBorderCollide();
+            BallRacketCollision();
         }
 
         private void MoveBall()
         {
             Ball.Top += verVelocity;
             Ball.Left += horVelocity;
+        }
+
+        private void BallRacketCollision()
+        {
+            if (Ball.Bounds.IntersectsWith(Racket.Bounds))
+            {
+                verVelocity *= -1;
+            }
         }
 
         private void BallBorderCollide()
@@ -107,6 +123,30 @@ namespace BouncingBall
         private void UpdateBallStepLabel()
         {
             BallStepLabel.Text = "Ball Step: " + ballStep;
+        }
+
+
+        private void Racket_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void Racket_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            if (e.Button == MouseButtons.Left)
+            {
+                MouseDownLocation = e.Location;
+            }
+        }
+
+        private void Racket_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Racket.Left = e.X + Racket.Left - MouseDownLocation.X;
+                Racket.Top = e.Y + Racket.Top - MouseDownLocation.Y;
+            }
         }
     }
 }
