@@ -30,13 +30,15 @@
         {
             this.Ball = new System.Windows.Forms.PictureBox();
             this.SpeedLabel = new System.Windows.Forms.Label();
+            this.Racket = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Ball)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Racket)).BeginInit();
             this.SuspendLayout();
             // 
             // Ball
             // 
             this.Ball.BackColor = System.Drawing.Color.Coral;
-            this.Ball.Location = new System.Drawing.Point(416, 186);
+            this.Ball.Location = new System.Drawing.Point(365, 86);
             this.Ball.Name = "Ball";
             this.Ball.Size = new System.Drawing.Size(100, 100);
             this.Ball.TabIndex = 0;
@@ -52,16 +54,27 @@
             this.SpeedLabel.TabIndex = 1;
             this.SpeedLabel.Text = "label1";
             // 
+            // Racket
+            // 
+            this.Racket.BackColor = System.Drawing.Color.Aqua;
+            this.Racket.Location = new System.Drawing.Point(274, 300);
+            this.Racket.Name = "Racket";
+            this.Racket.Size = new System.Drawing.Size(254, 38);
+            this.Racket.TabIndex = 2;
+            this.Racket.TabStop = false;
+            // 
             // Field
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Racket);
             this.Controls.Add(this.SpeedLabel);
             this.Controls.Add(this.Ball);
             this.Name = "Field";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.Ball)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Racket)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -71,6 +84,7 @@
 
         private System.Windows.Forms.PictureBox Ball;
         private System.Windows.Forms.Label SpeedLabel;
+        private System.Windows.Forms.PictureBox Racket;
     }
 }
 

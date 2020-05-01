@@ -52,6 +52,7 @@ namespace BouncingBall
         {
             MoveTheBall();
             BallBorderCollision();
+            BallRacketCollision();
         }
 
         private void MoveTheBall()
@@ -108,6 +109,14 @@ namespace BouncingBall
         {
             verVelocity = speed * (verVelocity / Math.Abs(verVelocity));
             horVelocity = speed * (horVelocity / Math.Abs(horVelocity));
+        }
+
+        private void BallRacketCollision()
+        {
+            if (Ball.Bounds.IntersectsWith(Racket.Bounds))
+            {
+                verVelocity = -verVelocity;
+            }
         }
 
     }
