@@ -57,6 +57,7 @@ namespace BouncingBall
             MoveTheBall();
             BallBorderCollision();
             BallRacketCollision();
+            BallBrickCollision();
         }
 
         private void MoveTheBall()
@@ -159,6 +160,21 @@ namespace BouncingBall
                     brick.Top = r * (brickHeight + brickVerSpace);
                     brick.Tag = "brick";
                     this.Controls.Add(brick);
+                }
+            }
+        }
+
+        private void BallBrickCollision()
+        {
+            foreach(Control contr in this.Controls)
+            {
+                if((string)contr.Tag == "brick")
+                {
+                    if (contr.Bounds.IntersectsWith(Ball.Bounds))
+                    {
+                        contr.Dispose();
+                        verVelocity *= -1;
+                    }
                 }
             }
         }
