@@ -15,8 +15,8 @@ namespace BouncingBall
         private int verVelocity = 0;
         private int horVelocity = 0;
         private int speed = 2;
-        bool mouseDown = false;
 
+        private PictureBox brick = null;
         private Timer mainTimer = null;
         private Point MouseDownLocation;
 
@@ -39,7 +39,9 @@ namespace BouncingBall
             Ball.SizeMode = PictureBoxSizeMode.StretchImage;
             Ball.Height = 40;
             Ball.Width = 40;
-            Ball.BackColor = Color.Transparent;           
+            Ball.BackColor = Color.Transparent;
+
+            BuildBricks(5, 10);
         }
         
         private void InitializeMainTimer()
@@ -122,12 +124,12 @@ namespace BouncingBall
         }
 
          private void Racket_MouseDown(object sender, MouseEventArgs e)
-        {
+         {
             if (e.Button == MouseButtons.Left)
             {
                 MouseDownLocation = e.Location;
             }
-        }
+         }
 
         private void Racket_MouseMove(object sender, MouseEventArgs e)
         {
@@ -135,6 +137,29 @@ namespace BouncingBall
             {
                 Racket.Left = e.X + Racket.Left - MouseDownLocation.X;
                 Racket.Top = e.Y + Racket.Top - MouseDownLocation.Y;
+            }
+        }
+
+        private void BuildBricks(int rows, int cols)
+        {
+            int brickWidth = 60;
+            int brickHeight = 20;
+            int brickVerSpace = 5;
+            int brickHorSpace = 10;
+
+            for(int r = 1; r <= rows; r++)
+            {
+                for(int c = 1; c <= cols; c++)
+                {
+                    brick = new PictureBox();
+                    brick.BackColor = Color.RosyBrown;
+                    brick.Width = brickWidth;
+                    brick.Height = brickHeight;
+                    brick.Left = c * (brickWidth + brickHorSpace);
+                    brick.Top = r * (brickHeight + brickVerSpace);
+                    brick.Tag = "brick";
+                    this.Controls.Add(brick);
+                }
             }
         }
     }

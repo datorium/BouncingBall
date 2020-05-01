@@ -38,7 +38,7 @@
             // Ball
             // 
             this.Ball.BackColor = System.Drawing.Color.Coral;
-            this.Ball.Location = new System.Drawing.Point(365, 86);
+            this.Ball.Location = new System.Drawing.Point(344, 326);
             this.Ball.Name = "Ball";
             this.Ball.Size = new System.Drawing.Size(100, 100);
             this.Ball.TabIndex = 0;
@@ -57,7 +57,7 @@
             // Racket
             // 
             this.Racket.BackColor = System.Drawing.Color.Aqua;
-            this.Racket.Location = new System.Drawing.Point(291, 346);
+            this.Racket.Location = new System.Drawing.Point(265, 471);
             this.Racket.Name = "Racket";
             this.Racket.Size = new System.Drawing.Size(254, 38);
             this.Racket.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 542);
             this.Controls.Add(this.Racket);
             this.Controls.Add(this.SpeedLabel);
             this.Controls.Add(this.Ball);
