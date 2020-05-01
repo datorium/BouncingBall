@@ -15,8 +15,10 @@ namespace BouncingBall
         private int verVelocity = 0;
         private int horVelocity = 0;
         private int speed = 2;
+        bool mouseDown = false;
 
         private Timer mainTimer = null;
+        private Point MouseDownLocation;
 
         public Field()
         {
@@ -119,5 +121,21 @@ namespace BouncingBall
             }
         }
 
+         private void Racket_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                MouseDownLocation = e.Location;
+            }
+        }
+
+        private void Racket_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Racket.Left = e.X + Racket.Left - MouseDownLocation.X;
+                Racket.Top = e.Y + Racket.Top - MouseDownLocation.Y;
+            }
+        }
     }
 }

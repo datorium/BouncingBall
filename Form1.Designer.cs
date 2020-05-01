@@ -57,11 +57,13 @@
             // Racket
             // 
             this.Racket.BackColor = System.Drawing.Color.Aqua;
-            this.Racket.Location = new System.Drawing.Point(274, 300);
+            this.Racket.Location = new System.Drawing.Point(291, 346);
             this.Racket.Name = "Racket";
             this.Racket.Size = new System.Drawing.Size(254, 38);
             this.Racket.TabIndex = 2;
             this.Racket.TabStop = false;
+            this.Racket.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Racket_MouseDown);
+            this.Racket.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Racket_MouseMove);
             // 
             // Field
             // 
